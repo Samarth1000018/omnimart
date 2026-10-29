@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101a2b"><title>OmniMart AI · Checkout</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#"><span class="brand-mark">O</span><span>OmniMart <b>AI</b><small>SMART CHECKOUT</small></span></a><div class="top-actions"><span id="connection" class="pill muted">Connecting…</span><button id="newSession" class="button ghost">New visit</button></div></header>
+  <main class="layout">
+    <section class="main-column">
+      <div class="welcome"><div><p class="eyebrow">FRICTIONLESS SHOPPING</p><h1>Pick what you need.<br><span>We’ll take care of checkout.</span></h1><p class="subtle">Start your camera or upload a clip to see AI product detection in action.</p></div><div class="visit"><span class="visit-dot"></span><span>VISIT ID</span><strong id="sessionLabel">Starting…</strong></div></div>
+      <section class="camera-card card">
+        <div class="section-head"><div><h2>Live product detection</h2><p id="modelStatus" class="subtle">Camera is off</p></div><div class="live-label"><i></i> LIVE</div></div>
+        <div class="camera-stage" id="cameraStage"><video id="camera" autoplay muted playsinline></video><canvas id="overlay"></canvas><div id="cameraEmpty" class="camera-empty"><div class="camera-icon">◉</div><strong>Your camera view appears here</strong><span>Place an item in view; hold it steady for a moment.</span></div><div class="stage-hud"><span id="fpsLabel">AI STANDBY</span><span id="detectedLabel">0 items detected</span></div></div>
+        <div class="camera-controls"><button id="cameraButton" class="button primary"><span>▶</span> Start camera</button><label class="button secondary upload-button">▧ Upload footage<input id="videoUpload" type="file" accept="video/*"></label><button id="modelButton" class="button ghost">Load AI model</button><label class="custom-model">Custom model URL <input id="modelUrl" type="url" placeholder="/models/yolov8/model.json"><button id="loadCustom" class="button ghost small">Load</button></label></div>
+        <p class="notice">Camera processing runs on this device. Detection works best with one item centered in good lighting. You can also add products below.</p>
+      </section>
+      <section class="catalog-section"><div class="section-head"><div><p class="eyebrow">IN-STORE CATALOG</p><h2>Popular picks</h2></div><label class="search"><span>⌕</span><input id="productSearch" placeholder="Find a product" aria-label="Find a product"></label></div><div id="catalog" class="catalog-grid"></div></section>
+    </section>
+    <aside class="cart card"><div class="cart-heading"><div><p class="eyebrow">YOUR VISIT</p><h2>Smart basket <span id="cartCount" class="count">0</span></h2></div><button id="clearCart" class="icon-button" title="Clear basket">↺</button></div><div class="cart-tip"><span>✦</span> Items added by camera detection appear here.</div><div id="cartItems" class="cart-items"><div class="empty-cart"><div>▱</div><strong>Your basket is empty</strong><span>Pick an item or add one from the catalog.</span></div></div><div class="cart-bottom"><div class="subtotal"><span>Subtotal</span><strong id="subtotal">₹0.00</strong></div><div class="tax-row"><span>Taxes included</span><span id="taxes">₹0.00</span></div><button id="checkoutButton" class="button primary checkout" disabled>Continue to payment <span>→</span></button><p class="secure-note">⌑ Secure, simulated checkout · No charge will be made</p></div></aside>
+  </main>
+  <dialog id="paymentDialog" class="payment-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><p class="eyebrow">ALMOST DONE</p><h2>Choose how to pay</h2><p class="subtle">This demo simulates payment; no real money is collected.</p><div class="payment-methods"><button class="method selected" data-method="upi"><span>▦</span><b>UPI</b><small>Scan or approve</small></button><button class="method" data-method="card"><span>▰</span><b>Card</b><small>Simulated card</small></button><button class="method" data-method="cash"><span>₹</span><b>Cash</b><small>Pay at exit</small></button><button class="method" data-method="wallet"><span>◉</span><b>Wallet</b><small>Smart wallet</small></button></div><div id="paymentResult" class="payment-result" hidden></div><button id="payButton" class="button primary checkout">Pay <span id="payAmount">₹0.00</span></button><p class="secure-note">A signed exit QR is created after successful payment.</p></dialog>
+  <dialog id="receiptDialog" class="receipt-dialog"><button id="receiptClose" class="dialog-close">×</button><div class="receipt-check">✓</div><p class="eyebrow">PAYMENT APPROVED</p><h2>You’re all set.</h2><p class="subtle">Show this exit pass at the gate.</p><div id="exitQr" class="qr-box"></div><code id="exitToken"></code><p class="receipt-total">Total paid <strong id="receiptTotal"></strong></p><button id="doneButton" class="button primary checkout">Done</button></dialog>
+  <footer>OmniMart AI <span>·</span> Prototype checkout <span>·</span> Payments are simulated</footer>
+</body></html>
