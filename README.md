@@ -14,7 +14,7 @@ Browser-first autonomous checkout prototype. The web app runs TensorFlow.js in t
    uvicorn app.main:app --reload
    ```
 
-   Startup creates `omnimart.db` and seeds 14 catalog entries. API docs are at `http://localhost:8000/docs`.
+   Startup creates `omnimart.db` and seeds the catalog, including a demo smartphone item so COCO-SSD's `cell phone` detection can be tested end to end. API docs are at `http://localhost:8000/docs`.
 2. Open `http://localhost:8000/`. FastAPI serves the checkout site there (and at `/smart-checkout/`); the CCTV analyser is at `http://localhost:8000/cctv_analyser.html`. Camera access works on localhost. To serve the static pages separately, you can also run `python -m http.server 8080` from the repository root.
 3. Optional dashboard dependencies: `pip install -r requirements-dashboard.txt`, then run `streamlit run dashboard.py` from the repository root. Use `streamlit run omnimart-phase2/dashboard_phase2.py` for the phase-two CSV review.
 4. Open `cctv_analyser.html` to upload and analyse a recording. Install `requirements-training.txt`, then use `python collect_images.py <label>` to collect training samples; press SPACE to save and Q to quit.

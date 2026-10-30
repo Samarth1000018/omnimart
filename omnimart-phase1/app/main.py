@@ -21,7 +21,7 @@ app.mount("/smart-checkout", StaticFiles(directory=PROJECT_ROOT / "smart-checkou
 SECRET = os.getenv("OMNIMART_JWT_SECRET", "local-demo-secret-change-me")
 ALGORITHM = "HS256"
 PRODUCTS = [
- ("p1","Bananas","Fresh produce",49, ["banana"],"🍌"),("p2","Red Apple","Fresh produce",35,["apple"],"🍎"),("p3","Orange Juice","Drinks",120,["bottle"],"🧃"),("p4","Milk 1L","Dairy",68,["bottle"],"🥛"),("p5","Bread Loaf","Bakery",45,["bread"],"🍞"),("p6","Potato Chips","Snacks",30,["chips"],"🥔"),("p7","Water Bottle","Drinks",20,["bottle"],"💧"),("p8","Cereal Box","Pantry",185,["book"],"🥣"),("p9","Chocolate Bar","Snacks",40,["chocolate"],"🍫"),("p10","Coffee","Pantry",220,["cup"],"☕"),("p11","Yogurt Cup","Dairy",55,["cup"],"🥛"),("p12","Eggs (6 pack)","Dairy",72,["eggs"],"🥚"),("p13","Tomatoes","Fresh produce",42,["tomato"],"🍅"),("p14","Soap Bar","Household",38,["soap"],"🧼")]
+ ("p1","Bananas","Fresh produce",49, ["banana"],"🍌"),("p2","Red Apple","Fresh produce",35,["apple"],"🍎"),("p3","Orange Juice","Drinks",120,["bottle"],"🧃"),("p4","Milk 1L","Dairy",68,["bottle"],"🥛"),("p5","Bread Loaf","Bakery",45,["bread"],"🍞"),("p6","Potato Chips","Snacks",30,["chips"],"🥔"),("p7","Water Bottle","Drinks",20,["bottle"],"💧"),("p8","Cereal Box","Pantry",185,["book"],"🥣"),("p9","Chocolate Bar","Snacks",40,["chocolate"],"🍫"),("p10","Coffee","Pantry",220,["cup"],"☕"),("p11","Yogurt Cup","Dairy",55,["cup"],"🥛"),("p12","Eggs (6 pack)","Dairy",72,["eggs"],"🥚"),("p13","Tomatoes","Fresh produce",42,["tomato"],"🍅"),("p14","Soap Bar","Household",38,["soap"],"🧼"),("p15","Smartphone","Electronics",14999,["cell phone"],"📱")]
 
 @app.get("/", include_in_schema=False)
 async def home():
